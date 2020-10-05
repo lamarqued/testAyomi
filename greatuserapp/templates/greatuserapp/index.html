@@ -1,0 +1,97 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="icon" href="{% static 'greatuserapp/images/LogoAyomi.png' %}">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'greatuserapp/style.css' %}">
+
+  <title>Index</title>
+</head>
+
+<body style="background-color:hsla(0,0%,96.5%,.6);">
+
+  <div class="d-flex flex-column displaybox">
+    <img class="d-block mx-auto mt-auto pb-4 logo" src="{% static 'greatuserapp/images/LogoAyomi.png' %}"
+      alt="logo Ayomi">
+
+    {% if user.is_authenticated %}
+    <div class="d-flex flex-column userinterface text-center">
+      <h4 class="pb-4">Bienvenue {{ user.username }} !</h4>
+
+      <div class="p-3">
+        <h5>Vos informations</h5>
+        <hr class="my-4">
+        <div class="d-flex justify-content-between">
+          <p class="text-secondary text-left">Nom d'utilisateur</p>
+          {{ user.username }}
+        </div>
+        {% if user.email %}
+        <div class="d-flex justify-content-between">
+          <p class="text-secondary text-left">Adresse email</p>
+          {{ user.email }}
+        </div>
+        {% else %}
+        <div class="d-flex justify-content-between">
+          <p class="text-secondary text-left">Adresse email</p>
+          <p>aucune adresse enregistrée</p>
+        </div>
+        {% endif %}
+        {% if badadress %}
+        <p class="text-danger">L'adresse entrée est invalide. Veuillez réessayer.</p>
+        {% endif %}
+        <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#changeEmailModal">Modifier
+          ses informations</button>
+      </div>
+      <a class="mt-0" href="/accounts/logout">Se déconnecter</a>
+    </div>
+    {% else %}
+    <div class="d-flex flex-column userinterface text-center">
+      <h5>Veuillez vous connecter afin d'accéder à l'application.</h5>
+      <a href="/accounts/login">Aller à l'écran de connexion</a>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="modal fade" id="changeEmailModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modifier ses informations</h5>
+        </div>
+        <div class="modal-body">
+          <form method="post">
+            {% csrf_token %}
+            <p>Veuillez entrer une nouvelle adresse email :</p>
+            <p>{{ form.email }}</p>
+            <div class="mt-3 d-flex justify-content-right">
+              <button type="button" class="btn btn-secondary m-1" data-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-primary m-1">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
