@@ -43,4 +43,4 @@ Three routes are available on the application :
 
 ## Authors
 
-**Denis LAMARQUE**
+**Denis LAMARQUE** - [Linkedin](https://www.linkedin.com/in/denis-lamarque-8b0534141/)
